@@ -14,7 +14,7 @@ def driver(request):
     base_url = "https://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/wd/hub"
 
     # Create the Remote WebDriver with the specified capabilities
-    driver = webdriver.Chrome(command_executor=base_url, desired_capabilities=capabilities)
+    driver = webdriver.Remote(command_executor=base_url, desired_capabilities=capabilities)
     
     def fin():
         driver.quit()
