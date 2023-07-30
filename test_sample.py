@@ -9,10 +9,16 @@ def driver(request):
     options.browser_name = "chrome"
     options.browser_version = "latest"
     options.platform_name = "macOS 11.0"
+    capabilities = {
+        "browserName": "chrome",
+        "version": "latest",
+        "platform": "macOS 11.0",
+        "acceptInsecureCerts": True
+    }
     base_url = "https://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/wd/hub"
 
     # Create the Remote WebDriver with the specified capabilities
-    driver = webdriver.Remote(command_executor=base_url, options=options)
+    driver = webdriver.Remote(command_executor=base_url, options=options, desired_capabilities=capabilities)
     
     def fin():
         driver.quit()
