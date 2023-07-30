@@ -1,24 +1,19 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 @pytest.fixture
 def driver(request):
     # Define the desired capabilities for Selenium Grid
-    options = Options()
-    options.browser_name = "chrome"
-    options.browser_version = "latest"
-    options.platform_name = "macOS 11.0"
-    capabilities = {
-        "browserName": "chrome",
-        "version": "latest",
-        "platform": "macOS 11.0",
-        "acceptInsecureCerts": True
-    }
+    capabilities = DesiredCapabilities.CHROME.copy()
+    capabilities['browserName'] = 'chrome'
+    capabilities['version'] = 'latest'
+    capabilities['platform'] = 'macOS 11.0'
+    capabilities['acceptInsecureCerts'] = True
     base_url = "https://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/wd/hub"
 
     # Create the Remote WebDriver with the specified capabilities
-    driver = webdriver.Remote(command_executor=base_url, options=options, desired_capabilities=capabilities)
+    driver = webdriver.Remote(command_executor=base_url, desired_capabilities=capabilities)
     
     def fin():
         driver.quit()
