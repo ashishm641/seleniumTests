@@ -10,7 +10,8 @@ def driver(request):
     options.version = "latest"
     options.platform = "macOS 11.0"
     options.accept_insecure_certs = True
-    options.ssl_version = "TLSv1.2"
+    # The following line will tell Selenium to use the lowest version of SSL that is supported by both the server and the client.
+    options.ssl_version = "AUTO"
     base_url = "https://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/wd/hub"
 
     # Create the Remote WebDriver with the specified capabilities
