@@ -1,0 +1,35 @@
+name: Parallel Test Execution
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        browser: [chrome, firefox]
+        version: [latest]
+        platform: [Windows 10, macOS 11.0]
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest --driver Remote --capability browserName:${{ matrix.browser }} --capability version:${{ matrix.version }} --capability platform:${{ matrix.platform }} --base-url https://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/wd/hub
+
+
