@@ -1,9 +1,3 @@
-
-The Python code you provided will not work with Python 2. The accept_insecure_certs and ssl_version options were introduced in Python 3. In Python 2, you would need to use the ignore_ssl_errors option instead.
-
-Here is the updated code that will work with Python 2:
-
-Python
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
