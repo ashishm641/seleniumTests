@@ -10,14 +10,15 @@ class TestSeleniumGrid(unittest.TestCase):
         options.browser_name = "chrome"
         options.version = "latest"
         options.platform = "macOS 11.0"
-        base_url = "http://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/ui#/sessions"
+        base_url = "https://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/wd/hub"
+
 
         # Create the Remote WebDriver with the specified capabilities
         self.driver = webdriver.Remote(command_executor=base_url, options=options)
 
     def test_example(self):
         # Your test code goes here
-        self.driver.get("http://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/ui#/sessions")
+        self.driver.get("https://a9a62f8fea028418b89cc1c7fae3c67f-808020604.us-east-1.elb.amazonaws.com:4444/wd/hub")
         assert "Selenium Grid" in self.driver.title
         self.driver.find_element_by_id("username").send_keys("admin")
         self.driver.find_element_by_id("password").send_keys("admin")
