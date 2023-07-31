@@ -1,22 +1,17 @@
-name: Selenium Tests
+name: Selenium Grid Test
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.9'
-
-    - name: Install dependencies
-      run: pip install pytest selenium
-
-    - name: Run Selenium Tests
-      run: pytest test_sample.py
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 2.7
+      - run: pip install selenium
+      - run: python test_selenium_grid.py
